@@ -1,6 +1,7 @@
 # Summary of Intelligent Body School — 「明途」个性化人生规划 AI 助手
 
-> **《大数据应用场景项目实训》课程考核项目** · 大数据智能体应用方向
+> **《大数据应用场景项目实训》项目** · 大数据智能体应用方向
+> 
 > Author：Hulinkang　　Instructor：퇴 함　|　2026 年 10 月
 
 <div align="center">
