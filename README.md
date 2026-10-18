@@ -1,7 +1,7 @@
 # Summary of Intelligent Body School — 「明途」个性化人生规划 AI 助手
 
 > **《大数据应用场景项目实训》课程考核项目** · 大数据智能体应用方向
-> 作者：胡林康　|　学号：23280128　|　上海师范大学天华学院 · 商学院 · 23大数据管理与应用一班　|　指导教师：杭磊　|　2026 年 10 月
+> Author：Hulinkang　　Instructor：퇴 함　|　2026 年 10 月
 
 <div align="center">
 
