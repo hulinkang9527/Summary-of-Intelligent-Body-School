@@ -23,7 +23,7 @@ BASE = os.path.dirname(ROOT)
 SHOTS = os.path.join(BASE, "04_过程资料", "测试记录")
 SHOTS_NEW = os.path.join(BASE, "04_过程资料", "新版应用截图")
 SHOTS_COZE = os.path.join(BASE, "04_过程资料", "扣子智能体")
-OUT = os.path.join(BASE, "01_课程报告", "《大数据应用场景项目实训》课程报告_胡林康_23280128.docx")
+OUT = os.path.join(BASE, "01_课程报告", "《大数据应用场景项目实训》课程报告_Hulinkang.docx")
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 
 
@@ -150,8 +150,8 @@ def cover(doc):
     fields = [
         ('学    院：', '商学院'),
         ('专业班级：', '23大数据管理与应用一班'),
-        ('姓    名：', '胡林康'),
-        ('学    号：', '23280128'),
+        ('姓    名：', 'Hulinkang'),
+        ('学    号：', '—'),
         ('指导教师：', '杭磊'),
     ]
     for k, v in fields:

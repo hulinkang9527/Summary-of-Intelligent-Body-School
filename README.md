@@ -30,7 +30,7 @@
 - **Retrieval**: Chinese BM25 retrieval recalls relevant items from the KB and injects them, together with the user profile, into the LLM prompt — every answer is traceable to a numbered source.
 - **Validation**: KB parse distribution matches the official source exactly; **31/31 smoke tests and cloud pipeline checks passed**.
 
-Author: **Hu Linkang** (胡林康), Shanghai Normal University Tianhua College, Class of 2023, Big Data Management & Application.
+Author: **Hulinkang**
 
 ---
 
@@ -164,8 +164,8 @@ Summary-of-Intelligent-Body-School/
 ├── README.md                        # 本文件（项目总览）
 ├── LICENSE.md                       # 许可声明
 ├── docs/                            # 课程报告与论文
-│   ├── 《大数据应用场景项目实训》课程报告_胡林康_23280128.docx
-│   ├── 23280128胡林康大数据应用场景项目实训课程论文.pdf
+│   ├── 《大数据应用场景项目实训》课程报告_Hulinkang.docx
+│   ├── 大数据应用场景项目实训课程论文_Hulinkang.pdf
 │   └── 在线链接.md
 ├── src/                             # 项目源码
 │   ├── web/                         # 前端单页应用（双击即可运行）
