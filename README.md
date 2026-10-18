@@ -1,10 +1,14 @@
+<div align="center">
+
+<img src="media/明途logo.png" alt="明途 · 个性化人生规划 AI 助手" width="280">
+
 # Summary of Intelligent Body School — 「明途」个性化人生规划 AI 助手
 
 > **《大数据应用场景项目实训》项目** · 大数据智能体应用方向
 > 
 > Author：Hulinkang　　Instructor：퇴 함　|　2026 年 10 月
 
-<div align="center">
+**用最少的钱、时间和精力，把每个人生选择的投入与产出摆到台面上**
 
 [![WorkBuddy 在线应用](https://img.shields.io/badge/在线应用-WorkBuddy-1a73e8?style=flat-square)](https://life-planner-agent.app.workbuddy.host/)
 [![扣子智能体](https://img.shields.io/badge/智能体-扣子Coze-00b96b?style=flat-square)](https://www.coze.cn/store/agent/7690965999021522980?bot_id=true)
