@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="x5-video-player-type" content="h5">
+<meta name="x5-video-orientation" content="portrait">
+<title>明途 · 人生规划 AI 助手</title>
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<link rel="stylesheet" href="assets/css/agent.css?v=20261001d">
+</head>
+<body>
+
+<!-- ============ 开场动画（视频，每次打开链接播放一次） ============ -->
+<div id="introView" class="intro-view">
+  <video id="introVideo" src="assets/video/intro_v2.mp4?v=20260930c" poster="assets/video/intro_poster.jpg?v=20260930c"
+         autoplay muted playsinline webkit-playsinline x5-playsinline preload="auto"></video>
+  <button id="introSkip" class="intro-skip">跳过 ›</button>
+  <div class="intro-brand"><img src="assets/img/logo.png" alt="明途"><span>明途 · 人生规划 AI 助手</span></div>
+</div>
+
+<!-- ============ 登录 / 注册视图 ============ -->
+<div id="authView" class="auth-view">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <img class="logo-img" src="assets/img/logo.png" alt="明途">
+      <div>
+        <h2>明途</h2>
+        <p>个性化人生规划 AI 助手</p>
+      </div>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="atab on" data-atab="login">登录</button>
+      <button class="atab" data-atab="otp">验证码登录</button>
+      <button class="atab" data-atab="signup">注册</button>
+    </div>
+
+    <form class="apanel on" id="panel-login" autocomplete="on">
+      <input type="email" id="li-email" placeholder="邮箱（支持 QQ 邮箱等）" required>
+      <input type="password" id="li-pwd" placeholder="密码" required>
+      <button type="submit" class="abtn">登录</button>
+      <button type="button" class="linklike" id="goReset">忘记密码？</button>
+    </form>
+
+    <form class="apanel" id="panel-otp">
+      <input type="email" id="ot-email" placeholder="邮箱" required>
+      <div class="code-row">
+        <input type="text" id="ot-code" placeholder="邮箱验证码" inputmode="numeric" maxlength="8">
+        <button type="button" class="ghost" id="ot-send">发送验证码</button>
+      </div>
+      <button type="submit" class="abtn">登录</button>
+    </form>
+
+    <form class="apanel" id="panel-signup">
+      <input type="email" id="su-email" placeholder="邮箱（支持 QQ 邮箱等）" required>
+      <div class="code-row">
+        <input type="text" id="su-code" placeholder="邮箱验证码" inputmode="numeric" maxlength="8">
+        <button type="button" class="ghost" id="su-send">发送验证码</button>
+      </div>
+      <input type="password" id="su-pwd" placeholder="设置密码（至少 6 位）" minlength="6" required>
+      <button type="submit" class="abtn">注册并登录</button>
+    </form>
+
+    <form class="apanel" id="panel-reset">
+      <input type="email" id="rs-email" placeholder="注册邮箱" required>
+      <div class="code-row">
+        <input type="text" id="rs-code" placeholder="邮箱验证码" inputmode="numeric" maxlength="8">
+        <button type="button" class="ghost" id="rs-send">发送验证码</button>
+      </div>
+      <input type="password" id="rs-pwd" placeholder="新密码（至少 6 位）" minlength="6" required>
+      <button type="submit" class="abtn">重置密码</button>
+      <button type="button" class="linklike" id="backLogin">返回登录</button>
+    </form>
+
+    <div id="authMsg" class="auth-msg"></div>
+  </div>
+</div>
+
+<!-- ============ 主应用视图（参考教学系统布局：左侧栏 + 对话主区） ============ -->
+<div id="appView" hidden>
+  <div class="shell">
+
+    <!-- 左侧栏 -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sb-brand">
+        <img class="logo-img sm" src="assets/img/logo.png" alt="明途">
+        <b>明途</b>
+        <button class="sb-close" id="sbClose" aria-label="收起">✕</button>
+      </div>
+      <button class="new-chat" id="newChatBtn">＋ 新建对话</button>
+      <div class="sb-label">历史对话</div>
+      <div class="conv-list" id="convList"></div>
+      <div class="sb-foot">
+        <button class="sb-item" data-view="plan">📋 我的规划</button>
+        <button class="sb-item" data-view="stats">📊 数据统计</button>
+        <div class="sb-user">
+          <img id="userAvatar" class="uavatar" src="" alt="" hidden>
+          <div id="avatarFallback" class="uavatar-fb">我</div>
+          <input type="file" id="avatarInput" accept="image/*" hidden>
+          <span id="userEmail" class="uemail"></span>
+          <button id="logoutBtn" class="linklike">退出</button>
+        </div>
+      </div>
+    </aside>
+    <div class="sb-mask" id="sbMask"></div>
+
+    <!-- 主区 -->
+    <main class="main">
+      <header class="topbar">
+        <button class="hamb" id="sbOpen" aria-label="菜单">☰</button>
+        <div class="model-box" id="modelBox">
+          <button class="model-btn" id="modelBtn">
+            <span id="modelName">加载模型…</span>
+            <i class="caret">▾</i>
+          </button>
+          <div class="model-state"><i class="dot ok"></i><span id="modelState">已就绪</span></div>
+          <div class="model-menu" id="modelMenu" hidden></div>
+        </div>
+      </header>
+
+      <!-- 对话视图 -->
+      <section class="view on" id="view-chat">
+        <div class="chat-scroll" id="chatScroll">
+          <!-- 欢迎页（无消息时显示） -->
+          <div class="welcome" id="welcome">
+            <img class="w-logo-img" src="assets/img/logo.png" alt="明途">
+            <h1>明途 · 人生规划 AI 助手</h1>
+            <p class="w-desc">基于《高性价比人生指南》615 条结构化建议，结合 AI 大模型，帮你把价值观、目标、资源与约束问清楚，把选择的投资回报比摆到台面上，拆成可执行的阶段计划，并在执行后陪你复盘。涉及医疗、法律、投资等重大事项会提示咨询专业人士。</p>
+            <div class="w-quick" id="wQuick">
+              <button data-q="我最近很迷茫，不知道该考研还是直接工作，帮我分析一下">我迷茫，考研还是工作？</button>
+              <button data-q="每天通勤两小时值不值？帮我算算投入产出比">每天通勤两小时值不值？</button>
+              <button data-q="我想一年内攒下5万块，帮我生成一份阶段计划">帮我生成一年攒钱计划</button>
+              <button data-q="30岁的护士想转行，帮我梳理一下方向">30岁护士想转行怎么办</button>
+              <button data-q="我要不要花两万块考证？">花两万考证值不值？</button>
+            </div>
+          </div>
+          <div class="chat" id="chat" hidden></div>
+        </div>
+        <footer class="input-bar">
+          <div class="in-row">
+            <textarea id="msg" rows="1" placeholder="输入你的人生问题，例如：如何规划职业？什么值得投入？…（Enter 发送，Shift+Enter 换行）"></textarea>
+            <button id="sendBtn" class="send" aria-label="发送">➤</button>
+          </div>
+        </footer>
+      </section>
+
+      <!-- 我的规划 -->
+      <section class="view" id="view-plan">
+        <div class="plan-wrap">
+          <div class="pcard">
+            <h3>我的人生档案</h3>
+            <p class="hint">价值观、目标、资源、约束——对话时 AI 会自动参考这份档案。</p>
+            <div class="frow"><label>昵称</label><input id="pf-nickname" placeholder="怎么称呼你"></div>
+            <div class="frow"><label>价值观 Top3</label><input id="pf-values" placeholder="如：健康 > 成长 > 自由"></div>
+            <div class="frow"><label>当前目标</label><input id="pf-goal" placeholder="如：一年内通过护士编制考试"></div>
+            <div class="frow"><label>可调动资源</label><input id="pf-resources" placeholder="如：月存 3000 / 每晚 2 小时"></div>
+            <div class="frow"><label>约束条件</label><input id="pf-constraints" placeholder="如：三班倒 / 要照顾家人"></div>
+            <button id="pfSave" class="abtn">保存档案</button>
+          </div>
+          <div class="pcard">
+            <h3>我的阶段计划</h3>
+            <p class="hint">对话里 AI 给出的计划，点「保存到我的规划」就会出现在这里。</p>
+            <div id="planList" class="plist"></div>
+          </div>
+          <div class="pcard">
+            <h3>今日打卡</h3>
+            <p class="hint">把今天要执行的事记下来，完成就打勾。</p>
+            <div class="ci-add">
+              <input id="ciItem" placeholder="今天要做的一件小事…">
+              <button id="ciAdd" class="ghost">添加</button>
+            </div>
+            <div id="ciList" class="ci-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 数据统计 -->
+      <section class="view" id="view-stats">
+        <div class="stats-wrap">
+          <div class="stat-cards">
+            <div class="scard"><b id="stChats">-</b><span>累计对话</span></div>
+            <div class="scard"><b id="stPlans">-</b><span>阶段计划</span></div>
+            <div class="scard"><b id="stDone">-</b><span>今日打卡完成</span></div>
+            <div class="scard"><b id="stDays">-</b><span>使用天数</span></div>
+          </div>
+          <div class="pcard"><h3>最近 7 天对话</h3><div id="stWeek" class="bars"></div></div>
+          <div class="pcard"><h3>场景分布</h3><div id="stScenes" class="scene-list"></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js"></script>
+<script src="assets/js/kb.js?v=20260930c"></script>
+<script src="assets/js/engine.js?v=20260930c"></script>
+<script src="assets/js/cloud.js?v=20260930c"></script>
+<script src="assets/js/agent.js?v=20261001d"></script>
+</body>
+</html>

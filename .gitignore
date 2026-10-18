@@ -1,0 +1,25 @@
+# 系统文件
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 凭据与隐私（严禁提交）
+.env
+.env.*
+*secret*
+*credential*
+credentials*
+
+# 临时与构建产物
+_work/
+tmp/
+dist/
+build/
+*.log
